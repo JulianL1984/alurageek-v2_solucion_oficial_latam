@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;300;400;700&family=Press+Start+2P&display=swap');
+@import url('<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,ops');
 
 * {
     box-sizing: border-box;
@@ -6,6 +6,7 @@
 
 body {
     height: 100vh;
+    background-color: #b4c8f0;
 }
 
 /* Estiliza a barra de rolagem */
@@ -19,7 +20,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 body::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Cor da faixa de rolagem (a parte fixa) */
+    background-color: #3b3a3a; /* Cor da faixa de rolagem (a parte fixa) */
 }
 
 img {
@@ -28,9 +29,10 @@ img {
 }
 
 h1 {
-    font-family: 'Press Start 2P';
+    font-family: "DM Sans", sans-serif;
     text-align: center;
-    font-size: small;
+    font-size: 26px;
+    font-weight: bolder;
 }
 
 input {
@@ -38,16 +40,17 @@ input {
     height: 30px;
     padding: 20px;
     border-radius: 30px;
-    border: 3px solid #03318C;
+    border: 3px solid #000000;
     font-weight: 600;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: "DM Sans", sans-serif;
     box-shadow: 0px 0px 10px 3px rgba(31, 30, 30, 0.7); /* Sombra del borde */
 }
 
 
 button {
     cursor: pointer;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: "DM Sans", sans-serif;
+    font-size: medium;
     font-weight: 500;
     color: #03318C;
 }
@@ -70,23 +73,24 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px; /* Establece una altura fija */
+    height: 0px; /* Establece una altura fija */
     padding: 1.3rem; /* Controla el espaciado a los lados */
-    background-color: #9d6be4;
+    background-color: rgba(30, 0, 71, 0.5); /* Fondo con 50% de transparencia */
     box-shadow: 0px 0px 10px 3px rgba(31, 30, 30, 0.7); 
 }
 
+
 .header img {
-    max-width: 150px; /* Ajusta el tamaño de la imagen */
+    max-width: 180px; /* Ajusta el tamaño de la imagen */
     height: auto;
     padding: 2rem; /* Controla el espaciado a los lados */
 }
 
-.busqueda .h1 {
+.busqueda {
     max-width: 500px;
     display: flex; /* Asegura que el botón de búsqueda se alinee a la derecha */
     justify-content: flex-end; /* Alinea el botón de búsqueda a la derecha */
-    padding: 0rem; /* Controla el espaciado a los lados */
+    padding: 2rem; /* Controla el espaciado a los lados */
 }
 
 /* Contenedor principal con dos secciones (izquierda y derecha) */
@@ -115,7 +119,7 @@ footer {
 }
 
 .no-products-message {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: "DM Sans", sans-serif;
     font-weight: 700;
     font-size: 16px;
     text-transform: uppercase;
@@ -140,16 +144,16 @@ footer {
 }
 
 .products-container::-webkit-scrollbar-thumb {
-    background-color: #5173e6; /* Cor do polegar (a parte móvel) */
+    background-color: #03318C;; /* Cor do polegar (a parte móvel) */
     border-radius: 4px; /* Borda arredondada do polegar */
 }
 
 .products-container::-webkit-scrollbar-track {
-    background-color: #c0bbbb; /* Cor da faixa de rolagem (a parte fixa) */
+    background-color: #7e7d7d; /* Cor da faixa de rolagem (a parte fixa) */
 }
 
 .card {
-    background-color: #607e97;
+    background-color: #ffffff;
     color:#000000 ;
     width: calc(100%/4);
     padding: 8px;
@@ -166,7 +170,7 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: "DM Sans", sans-serif;
     margin-top: 10px;
 }
 
@@ -216,7 +220,7 @@ footer {
 }
 
 .footer-container {
-    background-color: #9d6be4;;
+    background-color: #fdfcfd;;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -225,8 +229,8 @@ footer {
 }
 
 .footer-container > p, small {
-    color:#FFFFFF ;
-    font-family: 'IBM Plex Mono', monospace;
+    color:#000000 ;
+    font-family: "DM Sans", sans-serif;
 }
 
 @media screen and (max-width: 768px) {
@@ -236,7 +240,9 @@ footer {
         justify-content: center;
     }
 
-    .main-container > section {
+    .main-container > section > .left 
+    .main-container > section > .right
+    {
         width: 100%; 
         margin: 2rem 0 ;
     }
