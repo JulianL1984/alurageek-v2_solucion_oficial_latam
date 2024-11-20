@@ -1,9 +1,9 @@
 import { servicesProducts } from "../services/product-services.js";
 
 const productsContainer = document.querySelector("[data-product]");
-const searchInput = document.querySelector("#searchInput");  // Campo de búsqueda
+const form = document.querySelector("[data-form]");
 
-// Crea estructura HTML para ser renderizada dinámicamente con JS
+// Crea la estructura HTML para ser renderizada dinámicamente con JS
 function createCard({ name, price, image, id }) {
   const card = document.createElement("div");
   card.classList.add("card");
@@ -44,50 +44,45 @@ function addDeleteEvent(card, id) {
 }
 
 // Renderiza los productos en el DOM
-const renderProducts = async (products = []) => {
-  // Si no hay productos, muestra un mensaje
-  if (products.length === 0) {
-    productsContainer.innerHTML = "<p>No hay productos disponibles</p>";
-    return;
-  }
-
-  // Limpia los productos actuales
-  productsContainer.innerHTML = "";
-
-  products.forEach((product) => {
-    const productCard = createCard(product);
-    productsContainer.appendChild(productCard);
-  });
-};
-
-// Filtra productos por nombre
-const filterProducts = (products, searchTerm) => {
-  return products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-};
-
-// Manejo de búsqueda
-searchInput.addEventListener("input", async (event) => {
-  const searchTerm = event.target.value;
-
+const renderProducts = async () => {
   try {
     const listProducts = await servicesProducts.productList();
-    const filteredProducts = filterProducts(listProducts, searchTerm);
-    renderProducts(filteredProducts);
+    listProducts.forEach((product) => {
+      const productCard = createCard(product);
+      productsContainer.appendChild(productCard);
+    });
   } catch (err) {
     console.error("Error al renderizar productos:", err);
+  }
+};
+
+// Manejo del evento de envío del formulario
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const name = document.querySelector("[data-name]").value;
+  const price = document.querySelector("[data-price]").value;
+  const image = document.querySelector("[data-image]").value;
+
+  if (name === "" || price === "" || image === "") {
+    alert("Por favor, complete todos los campos");
+  } else {
+    try {
+      // Enviar la solicitud para crear un nuevo producto
+      const newProduct = await servicesProducts.createProduct(name, price, image);
+      console.log("Producto creado:", newProduct);
+
+      // Crear la tarjeta del nuevo producto y agregarla al contenedor
+      const newCard = createCard(newProduct);
+      productsContainer.appendChild(newCard);
+    } catch (error) {
+      console.error("Error al crear el producto:", error);
+    }
+
+    // Reiniciar el formulario
+    form.reset();
   }
 });
 
 // Ejecuta la función de renderizado inicial
-const init = async () => {
-  try {
-    const listProducts = await servicesProducts.productList();
-    renderProducts(listProducts);
-  } catch (err) {
-    console.error("Error al obtener la lista de productos:", err);
-  }
-};
-
-init();  // Carga los productos al inicio
+renderProducts();
