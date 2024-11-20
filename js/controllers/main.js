@@ -2,6 +2,7 @@ import { servicesProducts } from "../services/product-services.js";
 
 const productsContainer = document.querySelector("[data-product]");
 const form = document.querySelector("[data-form]");
+const searchInput = document.querySelector("#searchInput");  // Aquí está el input de búsqueda
 
 // Crea la estructura HTML para ser renderizada dinámicamente con JS
 function createCard({ name, price, image, id }) {
@@ -44,9 +45,11 @@ function addDeleteEvent(card, id) {
 }
 
 // Renderiza los productos en el DOM
-const renderProducts = async () => {
+const renderProducts = async (products = []) => {
+  productsContainer.innerHTML = ""; // Limpiamos los productos previos
+
   try {
-    const listProducts = await servicesProducts.productList();
+    const listProducts = products.length > 0 ? products : await servicesProducts.productList();
     listProducts.forEach((product) => {
       const productCard = createCard(product);
       productsContainer.appendChild(productCard);
@@ -56,7 +59,7 @@ const renderProducts = async () => {
   }
 };
 
-// Manejo del evento de envío del formulario
+// Manejo del evento de envío del formulario para agregar productos
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -83,6 +86,26 @@ form.addEventListener("submit", async (event) => {
     form.reset();
   }
 });
+
+// Función de búsqueda
+const searchProducts = async () => {
+  const searchQuery = searchInput.value.toLowerCase(); // Convertimos a minúsculas para que no importe si el usuario escribe en mayúsculas o minúsculas
+
+  try {
+    const listProducts = await servicesProducts.productList();
+    const filteredProducts = listProducts.filter(product =>
+      product.name.toLowerCase().includes(searchQuery) // Filtramos los productos que contengan la palabra del input
+    );
+
+    // Renderizamos los productos filtrados
+    renderProducts(filteredProducts);
+  } catch (err) {
+    console.error("Error al buscar productos:", err);
+  }
+};
+
+// Agregar el evento al input de búsqueda
+searchInput.addEventListener("input", searchProducts); // Usamos 'input' en lugar de 'click' para que busque mientras el usuario escribe
 
 // Ejecuta la función de renderizado inicial
 renderProducts();
