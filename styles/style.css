@@ -63,34 +63,39 @@ button {
 }
 
 footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
+    width: 100%; /* Asegura que el footer ocupe todo el ancho */
     box-shadow: 0px 0px 10px 3px rgba(31, 30, 30, 0.7); 
+    background-color: rgba(30, 0, 71, 0.5); /* Fondo del footer */
+    padding: 1rem; /* Espaciado interno */
+    text-align: center; /* Centra el texto */
 }
+
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 0px; /* Establece una altura fija */
-    padding: 1.3rem; /* Controla el espaciado a los lados */
-    background-color: rgba(30, 0, 71, 0.5); /* Fondo con 50% de transparencia */
+    height: 90px; /* Altura fija */
+    padding: 1rem; /* Espaciado a los lados */
+    background-color: rgba(30, 0, 71, 0.5); /* Fondo con transparencia */
     box-shadow: 0px 0px 10px 3px rgba(31, 30, 30, 0.7); 
 }
 
-
 .header img {
-    max-width: 180px; /* Ajusta el tamaño de la imagen */
+    max-width: 180px; /* Tamaño máximo de la imagen */
     height: auto;
-    padding: 2rem; /* Controla el espaciado a los lados */
+    padding: 2rem; /* Espaciado alrededor de la imagen */
 }
 
 .busqueda {
-    max-width: 500px;
-    display: flex; /* Asegura que el botón de búsqueda se alinee a la derecha */
-    justify-content: flex-end; /* Alinea el botón de búsqueda a la derecha */
-    padding: 2rem; /* Controla el espaciado a los lados */
+    flex-grow: 2; /* Aumenta el tamaño proporcional del elemento */
+    max-width: 470px; /* Elimina el límite máximo de ancho */
+    display: flex; /* Asegura la alineación del contenido interno */
+    justify-content: flex-end; /* Alinea el contenido interno a la derecha */
+    padding: 1rem; /* Espaciado a los lados */
 }
 
 /* Contenedor principal con dos secciones (izquierda y derecha) */
@@ -98,19 +103,20 @@ footer {
     display: flex; /* Alinea las secciones en fila */
     width: 100%;
     margin-top: 20px; /* Agrega espacio arriba para separar del header */
-    padding: 1rem;
+    padding: 2rem;
+    align-items: center;
 }
 
 /* Parte izquierda (mis productos) */
 .main-container > section > .left {
-    width: 70%; /* Ocupa el 70% del ancho */
-    padding-right: 10px; /* Pequeño margen entre las secciones */
+    width: 65%; /* Ocupa el 70% del ancho */
+    padding-right: 5px; /* Pequeño margen entre las secciones */
 }
 
 /* Parte derecha (agregar producto) */
 .main-container > section > .right {
-    width: 30%; /* Ocupa el 30% del ancho */
-    padding-left: 10px; /* Pequeño margen entre las secciones */
+    width: 35%; /* Ocupa el 30% del ancho */
+    padding-left: 15px; /* Pequeño margen entre las secciones */
 }
 
 /* Asegura que el header tenga espacio entre su contenido y el resto de la página */
@@ -140,12 +146,12 @@ footer {
 
 /* Estiliza a barra de rolagem */
 .products-container::-webkit-scrollbar {
-    width: 8px; /* Largura da barra de rolagem */
+    width: 10px; /* Largura da barra de rolagem */
 }
 
 .products-container::-webkit-scrollbar-thumb {
     background-color: #03318C;; /* Cor do polegar (a parte móvel) */
-    border-radius: 4px; /* Borda arredondada do polegar */
+    border-radius: 2px; /* Borda arredondada do polegar */
 }
 
 .products-container::-webkit-scrollbar-track {
@@ -154,52 +160,77 @@ footer {
 
 .card {
     background-color: #ffffff;
-    color:#000000 ;
-    width: calc(100%/4);
+    color: #000000;
+    width: calc(100% / 4);
     padding: 8px;
     border-radius: 5px;
     border: 3px solid #000000;
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    box-shadow: 0px 0px 10px 3px rgba(31, 30, 30, 0.7); 
+    box-shadow: 0px 0px 10px 3px rgba(31, 30, 30, 0.7);
+    position: relative; /* Esto es necesario para posicionar el botón de eliminación abajo */
+}
+
+.img-container {
+    width: 100%; /* Ancho del contenedor */
+    height: 300px; /* Altura fija del contenedor */
+    display: flex; /* Flexbox para centrar contenido */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    overflow: hidden; /* Asegura que los bordes de la imagen no sobresalgan */
+}
+
+.img-container img {
+    max-width: 100%; /* Ajusta el ancho máximo */
+    max-height: 100%; /* Ajusta la altura máxima */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del contenedor manteniendo sus proporciones */
 }
 
 
-.card-container--info{
+.card-container--info {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     font-family: "DM Sans", sans-serif;
     margin-top: 10px;
+    text-align: left; /* Alinea todo el texto a la izquierda */
+    font-weight: bold;
 }
 
-.card-container--value{
+.card-container--value {
     display: flex;
-    min-width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start; /* Alinea los valores a la izquierda */
+    gap: 1rem; /* Espacio entre los elementos dentro */
+    width: 100%;
 }
 
-.img-container{
-    border-color:3px #000000;
+.delete-button {
+    position: absolute; /* Esto permite que el botón se ubique dentro de la tarjeta, pero fuera del flujo normal */
+    bottom: 8px; /* Lo posiciona justo en la parte inferior de la tarjeta */
+    right: 8px; /* Lo posiciona en el lado derecho */
+    background-color: black;
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
 }
 
-.form-container{
+.delete-button:hover {
+    background-color: #ff3333; /* Cambio de color al pasar el cursor por encima */
+}
+
+.form-container {
     padding: 2rem 0;
     margin: 0 auto;
     max-width: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap:40px;
+    gap: 40px;
     flex-direction: column;
 }
 
-.delete-button {
-    background-color: transparent;
-    border: 0 none;
-   
-}
 
 .button-container {
     display: flex;
@@ -213,10 +244,18 @@ footer {
     box-shadow: 0px 0px 10px 3px rgba(31, 30, 30, 0.7); /* Sombra del borde */
 }
 
+.button-submit:hover {
+    background-color: #ff3333; /* Cambio de color al pasar el cursor por encima */
+}
+
 .button-clear{
     background-color: #FFFFFF;
     color:#03318C ;
     box-shadow: 0px 0px 10px 3px rgba(31, 30, 30, 0.7); /* Sombra del borde */
+}
+
+.button-clear:hover {
+    background-color: #ff3333; /* Cambio de color al pasar el cursor por encima */
 }
 
 .footer-container {
@@ -233,42 +272,35 @@ footer {
     font-family: "DM Sans", sans-serif;
 }
 
+/* Disposición en pantallas menores a 768px */
 @media screen and (max-width: 768px) {
     .main-container {
-        flex-direction: column; 
-        align-items: center;
-        justify-content: center;
+        display: flex;
+        flex-direction: column; /* Cambia a disposición en columna */
+        align-items: stretch; /* Asegura que las secciones ocupen todo el ancho */
+        gap: 2rem; /* Espaciado entre las secciones */
     }
 
-    .main-container > section > .left 
-    .main-container > section > .right
-    {
-        width: 100%; 
-        margin: 2rem 0 ;
+    .main-container > section > .right {
+        width: 100%; /* Ocupa todo el ancho */
+        order: 1; /* Se asegura de que aparezca primero */
     }
 
-    .form-container {
-        padding: 2rem;
+    .main-container > section > .left {
+        width: 100%; /* Ocupa todo el ancho */
+        order: 2; /* Se asegura de que aparezca después */
     }
 
-    .card {
-        width: calc(100% - 20px); 
-        margin-bottom: 15px; 
-    }
-
-    .button-container{
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    footer {
-        position: relative;
-    }
-
-    .footer-container > p,
-    .footer-container > small {
-        font-size: 14px;
+    .products-container {
+        max-height: 50vh; /* Altura máxima con scroll */
+        overflow-y: auto; /* Barra de desplazamiento vertical */
+        width: 100%; /* Asegura que ocupe todo el ancho */
     }
 }
 
-
+/* Disposición en pantallas menores a 468px */
+@media screen and (max-width: 468px) {
+    .busqueda {
+        display: none; /* Oculta el botón de búsqueda */
+    }
+}
